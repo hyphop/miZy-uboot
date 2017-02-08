@@ -1,0 +1,16 @@
+#!/bin/sh
+
+## hyphop ##
+
+. ./,config
+
+time make -j 16 -C $src
+
+uboot=`readlink u-boot-sunxi-with-spl-i2c-mizy.bin`
+
+echo "=="
+echo "OUTPUT $uboot"
+
+ls -l1 $uboot
+#file $uboot
+

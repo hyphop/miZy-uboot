@@ -1,0 +1,10 @@
+#!/bin/sh
+
+## hyphop ##
+
+. ./,config
+
+echo "make defconfig $conf"
+
+make -C $src defconfig $conf
+

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+## hyphop ##
+
+. ./,config
+
+git clone git://git.kernel.org/pub/scm/utils/dtc/dtc.git $dtc
+
+cd $dtc
+
+make -j 8
+

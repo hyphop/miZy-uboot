@@ -1,0 +1,9 @@
+#!/bin/sh
+
+## hyphop ##
+
+. ./,config
+
+make -C $src menuconfig
+
+

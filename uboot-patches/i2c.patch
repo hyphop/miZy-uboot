@@ -1,0 +1,29 @@
+diff -pruN uboot-mizy/drivers/i2c/soft_i2c.c uboot-miZy/drivers/i2c/soft_i2c.c
+--- uboot-mizy/drivers/i2c/soft_i2c.c	2017-02-08 10:11:06.000000000 +0700
++++ uboot-miZy/drivers/i2c/soft_i2c.c	2017-02-01 21:04:49.000000000 +0700
+@@ -430,16 +430,17 @@ static int  soft_i2c_write(struct i2c_ad
+ 		PRINTD("i2c_write, no chip responded %02X\n", chip);
+ 		return(1);
+ 	}
+-	shift = (alen-1) * 8;
+-	while(alen-- > 0) {
+-		if(write_byte(addr >> shift)) {
+-			PRINTD("i2c_write, address not <ACK>ed\n");
+-			return(1);
+-		}
+-		shift -= 8;
+-	}
++//	shift = (alen-1) * 8;
++//	while(alen-- > 0) {
++//		if(write_byte(addr >> shift)) {
++//			return(1);
++//		}
++//		PRINTD("i2c_write, address %d %d\n", alen , shift );
++//		shift -= 8;
++//	}
+ 
+ 	while(len-- > 0) {
++	        PRINTD("i2c_write data %04X\n", *buffer );
+ 		if(write_byte(*buffer++)) {
+ 			failures++;
+ 		}
