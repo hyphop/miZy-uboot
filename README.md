@@ -15,8 +15,7 @@
     mkdir miZy
     cd miZy
 
-    git clone
-
+    git clone https://github.com/hyphop/uboot-hyphop-mizy.git
     cd uboot-hyphop-mizy
 
     ./uboot_prepare
