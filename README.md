@@ -1,4 +1,4 @@
-#u-boot for miZy / OrangePi Zero board
+#u-boot for Orange Pi Zero board - miZy MODs
 
 ##Features
 
@@ -36,4 +36,4 @@ toolchain-arm_cortex-a9+neon_gcc-5.3.0_musl-1.1.15_eabi
 miZy - open source minimalistic tiny fast embedded Linux system
 for OrangePi Zero board MODs
 
-    ## hyphop ##
+    ## hyphop ## - its aliase for same name file - read this one for more information about license and etc.
