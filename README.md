@@ -49,13 +49,15 @@ u-boot-sunxi-with-spl-i2c-mizy.bin -> ./uboot-mizy/u-boot-sunxi-with-spl.bin
 * dtc v1.4.3
 * toolchain-arm_cortex-a9+neon_gcc-5.3.0_musl-1.1.15_eabi
 
+its easy and automated by scripts!
+
 ## miZy 
  
 miZy - open source minimalistic tiny fast embedded Linux system, (for sunxi Orange Pi Zero, another sunxi boards maybe work too )
 
 ## NOTES
 
-some source code parts in low quality ( sorry but I'm new to u boot ), some parts not annotated not documented, we stay in active develop now! wellcome to join us improve & tidy this code.
+some source code parts in low quality ( sorry but I'm new to uboot ), some parts not annotated not documented, we stay in active develop now! wellcome to join us improve & tidy this code.
 
 ## LINKS
 
