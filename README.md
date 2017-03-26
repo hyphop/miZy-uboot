@@ -6,19 +6,19 @@ Its just a part of miZy project, and same as other our parts can standalone used
 
 ## Features
 
-* boot from spi-flash and next full load linux from spi-flash, via new added **spiread** cmd
-* ready for fast full linux load, with boot-time about 4-8 sec (MMC-SPI), from power-on time
-* 4x increase SPI-flash reading speed in SPL-loader and UBOOT ( spi work on 24Mhz freq now )
-* i2c available on TWI0 (PA11 PA12)
-* splash screen on ssd1306 i2c OLED 128x64 display TWI0 connected
+* boot from spi-flash and next **full load linux from spi-flash** is ready via new added **spiread** cmd
+* ready for **fast** uboot & full linux load, with boot-time about 0.5 & 4-8 sec (MMC-SPI), from power-on time
+* **4x increase SPI**-flash reading speed in SPL-loader and UBOOT ( spi work on **24Mhz** freq now )
+* **i2c** available on TWI0 (PA11 PA12)
+* **splash screen** on **ssd1306** i2c OLED 128x64 display TWI0 connected
 * ready for uboot splash screen customization
-* FEL mode - set or disable fel or restore normal spl boot, direct from uboot shell
-* support any LZMA LZO GZIP uboot packed images, and direct as uboot shell cmd
+* **FEL mode** - set or disable fel or restore normal spl boot, direct from uboot shell
+* support any **LZMA LZO GZIP** uboot packed images, and direct as uboot shell cmd
 * accept uboot images with bad crc 
 * fast advanced configuration for build-in uboot environment, without recompilation
-* ready for next USB loading from any 3 usb ports
+* ready for next **USB loading** from any 3 usb ports
 * new improved building system full automated, speed + size optimized 
-* easy write new patches with find_changes script
+* **easy** write new **patches** with find_changes script
 * led indication and splash for boot process
 * many other small fix & adds
 
