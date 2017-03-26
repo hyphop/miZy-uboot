@@ -55,8 +55,7 @@ miZy - open source minimalistic tiny fast embedded Linux system, (for sunxi Oran
 
 ## NOTES
 
-some added source code part low quality ( sorry but I'm new to uboot ), some parts not annotated not documenated, we stay in active develop now!
-wellcome to join and improve & tidy this code.
+some source code parts in low quality ( sorry but I'm new to u boot ), some parts not annotated not documented, we stay in active develop now! wellcome to join us improve & tidy this code.
 
 ## LINKS
 
