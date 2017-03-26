@@ -6,6 +6,7 @@
 
 [ -d $logs ] || mkdir $logs
 [ -d ../bin/uboot ] || mkdir -p ../bin/uboot
+[ -d ,tmp ] || mkdir -p ,tmp
 
 [ -s $src/Makefile ] || {
 # prefer squashfs source
