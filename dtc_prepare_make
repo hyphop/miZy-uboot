@@ -10,7 +10,7 @@
 v="v1.4.4"
 v="v1.4.3"
 
-cmd="git clone --depth 1 git://git.kernel.org/pub/scm/utils/dtc/dtc.git $dtc"
+cmd="git clone git://git.kernel.org/pub/scm/utils/dtc/dtc.git $dtc"
 echo $cmd
 $cmd
 
@@ -22,7 +22,7 @@ cd $p
 
 rm -r $dtc/.git
 
-make -C $dtc -j 4
+make -C $dtc -j 4 all
 
 # 1.4.4
 #make all  -j 8

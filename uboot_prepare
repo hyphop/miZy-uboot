@@ -4,10 +4,17 @@
 
 . ./,config
 
+[ -d $logs ] || mkdir $logs
+
 [ -s $src/Makefile ] || {
+# prefer squashfs source
+    [ -s $squash_src ] || {
+	wget $squash_src_link -O ../$squash_src_name
+    }
+
     [ -s $squash_src ] && {
 	echo "mount squash & overlay"
-	./mount_overlay_squash
+	./mount_overlay_squash || echo "overlay method failed, trying another way..."
     }
 }
 
