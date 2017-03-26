@@ -4,19 +4,49 @@
 
 . ./,config
 
+[ -s $src/Makefile ] || {
+    [ -s $squash_src ] && {
+	echo "mount squash & overlay"
+	./mount_overlay_squash
+    }
+}
+
+#exit;
+
+[ -s $src/Makefile ] || {
+    echo "empty source dir"
+    a=uboot.tar.xz
+    [ -s $a ] && {
+	echo "unpack source $a"
+	tar -xf $a
+	rm uboot-mizy
+	mv uboot uboot-mizy
+    }
+}
+
+
+
 [ -s $src/Makefile ] || { 
     git clone --depth 1 -b v2017.01 https://github.com/RobertCNelson/u-boot $src
     rm -rd $src/.git
 }
 
+#exit
+
 [ -x $dtc/dtc ] || ./dtc_prepare_make
 
 
-arm-openwrt-linux-gcc --version > /dev/null || {
-    cd ..
-    [ -s $tc_gcc.tar.bz2 ] ||  wget -c $tc_src
-    tar -xf $tc_gcc.tar.bz2
-    ln -s $tc_gcc/$tc_gcc_dir $tc_gcc_dir
+arm-openwrt-linux-gcc --version 2>/dev/null 1>/dev/null || {
+
+    [ -s ../$tc_gcc_squash ] && {
+	cmd="mount -o ro ../$tc_gcc_squash ../$tc_gcc_dir"
+	echo $cmd
+	$cmd
+    }
+
+#    [ -s $tc_gcc.tar.bz2 ] ||  wget $tc_src
+#    tar -xf $tc_gcc.tar.bz2
+#    ln -s $tc_gcc/$tc_gcc_dir $tc_gcc_dir
 }
 
 cd $bdir

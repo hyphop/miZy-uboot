@@ -1,0 +1,73 @@
+--- uboot-mizy.ro/drivers/mtd/spi/sunxi_spi_spl.c	2017-02-08 10:11:06.000000000 +0700
++++ uboot-mizy.rw/drivers/mtd/spi/sunxi_spi_spl.c	2017-03-17 08:05:37.297237348 +0700
+@@ -4,6 +4,10 @@
+  * SPDX-License-Identifier:	GPL-2.0+
+  */
+ 
++// ## hyphop ## 
++// x2 and x4 speed improve
++// all same work fine 
++
+ #include <common.h>
+ #include <spl.h>
+ #include <asm/gpio.h>
+@@ -78,6 +82,7 @@
+ #define AHB_RESET_SPI0_SHIFT        20
+ #define AHB_GATE_OFFSET_SPI0        20
+ 
++#define SPI0_CLK_DIV_BY_1           0x0001
+ #define SPI0_CLK_DIV_BY_2           0x1000
+ #define SPI0_CLK_DIV_BY_4           0x1001
+ 
+@@ -113,9 +118,17 @@ static void spi0_enable_clock(void)
+ 	/* Open the SPI0 gate */
+ 	setbits_le32(CCM_AHB_GATING0, (1 << AHB_GATE_OFFSET_SPI0));
+ 
+-	/* Divide by 4 */
+-	writel(SPI0_CLK_DIV_BY_4, IS_ENABLED(CONFIG_SUNXI_GEN_SUN6I) ?
++	/* Divide by 4 */ 
++	//writel(SPI0_CLK_DIV_BY_4, IS_ENABLED(CONFIG_SUNXI_GEN_SUN6I) ?
++	//SPI readed 1000000 bytes from 0 offset, time 1.615
++	/* Divide by 2 */ 
++	//SPI readed 1000000 bytes from 0 offset, time 0.897
++	//writel(SPI0_CLK_DIV_BY_2, IS_ENABLED(CONFIG_SUNXI_GEN_SUN6I) ?
++	/* Divide by 1 */ 
++	//SPI readed 1000000 bytes from 0 offset, time 0.535
++	writel(SPI0_CLK_DIV_BY_1, IS_ENABLED(CONFIG_SUNXI_GEN_SUN6I) ?
+ 				  SUN6I_SPI0_CCTL : SUN4I_SPI0_CCTL);
++
+ 	/* 24MHz from OSC24M */
+ 	writel((1 << 31), CCM_SPI0_CLK);
+ 
+@@ -270,6 +283,9 @@ static int spl_spi_load_image(struct spl
+ 	struct image_header *header;
+ 	header = (struct image_header *)(CONFIG_SYS_TEXT_BASE);
+ 
++//	timer not work (
++//	ulong msecs = get_timer(0);
++
+ 	spi0_init();
+ 
+ 	spi0_read_data((void *)header, CONFIG_SYS_SPI_U_BOOT_OFFS, 0x40);
+@@ -280,8 +296,20 @@ static int spl_spi_load_image(struct spl
+ 	spi0_read_data((void *)spl_image->load_addr, CONFIG_SYS_SPI_U_BOOT_OFFS,
+ 		       spl_image->size);
+ 
++//	printf("\nSPI readed %d bytes from %d offset", 
++//	    spl_image->size,
++//	    CONFIG_SYS_SPI_U_BOOT_OFFS );
++
++//	msecs = get_timer(msecs);
++
++//	printf("readed %d bytes from %d offset, time %ld.%03d\n", 
++//	printf(". readed %d bytes from %d offset\n", 
++//	    spl_image->size,
++//	    CONFIG_SYS_SPI_U_BOOT_OFFS
++//        );
++
+ 	spi0_deinit();
+ 	return 0;
+ }
+ /* Use priorty 0 to override the default if it happens to be linked in */
+-SPL_LOAD_IMAGE_METHOD("sunxi SPI" 0, BOOT_DEVICE_SPI, spl_spi_load_image);
++SPL_LOAD_IMAGE_METHOD("sunxi SPI", 0, BOOT_DEVICE_SPI, spl_spi_load_image);

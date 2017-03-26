@@ -1,0 +1,25 @@
+# stop boot from mmc / clear spl/uboot 
+
+mw.b 0 ff 8192
+mmc read 0 10 16
+
+#hex(10) = 16 * 512
+
+#8192 / 512 = 16
+
+=> mmcinfo 
+Device: SUNXI SD/MMC
+Manufacturer ID: 2
+OEM: 544d
+Name: SA08G 
+Tran Speed: 50000000
+Rd Block Len: 512
+SD version 3.0
+High Capacity: Yes
+Capacity: 7.2 GiB
+Bus Width: 4-bit
+Erase Group Size: 512 Bytes
+
+
+
+

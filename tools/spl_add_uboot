@@ -1,0 +1,20 @@
+#!/bin/sh
+
+## hyphop ##
+
+## pack spl + uboot
+
+uboot_spl=/tmp/u-boot-spl-mizi.bin
+spl=sunxi-spl.bin
+uboot=u-boot-dtb.img
+
+md5sum $spl
+md5sum $uboot
+
+#64*512 = 32768
+
+dd count=64 bs=512 if=/dev/zero 2>/dev/null | tr '\0' "\377" | dd of=$uboot_spl
+dd if=$spl conv=notrunc of=$uboot_spl
+cat $uboot >> $uboot_spl
+
+md5sum $uboot_spl

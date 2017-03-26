@@ -1,0 +1,43 @@
+#!/usr/bin/perl
+
+## hyphop ##
+
+=head1 ABOUT bin2hex
+
+    convert raw data to hex
+
+=head1 USAGE
+
+    ./bin2hex [data] [data_size]
+    ./bin2hex [data_size] < data
+    ./bin2hex < data [data_size] > hexout
+
+=cut
+
+our $IN = shift if -f $ARGV[0];
+our $size = shift if $ARGV[0] =~ /^(\d+)$/;
+
+    die "[e] bad args: @ARGV\n" if @ARGV;
+    $IN ||= "<&STDIN";
+
+    $size ||= -s $IN;
+    $size ||= 4096;
+    open IN, $IN;
+
+open OUT, ">&STDOUT";
+
+warn "[i] get $size bytes from $IN\n";
+
+while ( sysread IN, $_, $size ) {
+    my $hexblock = unpack("H*" => $_);
+
+    if ( $ENV{split} ) {
+	my $split_size = $ENV{split} || 72;
+	$hexblock =~ s/(.{0,72})/$1\n/sg;
+    }
+
+    syswrite OUT, $hexblock;
+
+    last if $size >= length $_;
+}
+

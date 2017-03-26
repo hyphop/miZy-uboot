@@ -1,0 +1,81 @@
+#!/bin/sh
+
+## hyphop ##
+
+#http://stackoverflow.com/questions/15336285/write-on-a-mtd-block-device
+
+IMG=/tmp/u-boot-mizi.bin
+NAME=uboot_write
+
+usage() { echo "
+USAGE
+    $0 yes [$IMG] [/dev/mtd?|/dev/mmcblk?]
+
+EXAMPLE
+
+    ${NAME}_mmc yes $IMG
+    ${NAME}_spi yes $IMG
+    mode=spi ${NAME} yes
+    mode=mmc ${NAME} yes
+    dev=/dev/mmcblk1 ${NAME}_mmc yes
+    dev=/dev/mtd0 ${NAME}_spi yes
+
+ABOUT 
+    write UBOOT to SPI or MMC FLASH
+
+ALIAS for easy usage
+    ${NAME}_spi
+    ${NAME}_mmc
+
+uboot image file
+    $IMG
+
+"
+}
+
+arg=$0; dnm=`dirname $0`; ofs=${#dnm}; n=${#NAME}; ofs=$((ofs+n+2)) 
+[ "$mode" = "" ] && mode=${arg:$ofs}
+[ "$1" = "--help" ] && { usage ; exit 1; }
+[ "$mode" = "" ] && { mode=$1 ; shift; } 
+
+case $mode in
+    mmc)
+    [ "$dev" = "" ] && dev=/dev/mmcblk0
+    # 16*512 = 8192
+    offs=8192
+    bs=8192
+    ;;
+    spi)
+    [ "$dev" = "" ] && dev=/dev/mtd0
+    ;;
+    *)
+    echo "[e] undef mode"
+    usage
+    exit 1
+esac
+
+img=$IMG
+
+[ "$2" = "" ] || img=$2
+[ "$3" = "" ] || dev=$3
+
+[ -s $img ] || { echo "not found $img"; usage ; exit 1; } 
+[ -e $dev ] || { echo "not found $dev"; usage ; exit 1; } 
+
+case $mode in
+    mmc)
+    cmd="dd if=$img bs=$bs seek=$((offs/bs)) conv=notrunc of=$dev"
+    ;;
+    spi)
+    cmd="mtd $args write $img $dev"
+    ;;
+esac
+
+echo $cmd
+
+[ "$1" = "yes" ] || { usage ; exit 0; }
+
+echo "==WRITE $img => $dev"
+
+$cmd
+

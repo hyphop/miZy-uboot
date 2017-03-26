@@ -1,0 +1,28 @@
+#!/usr/bin/perl
+
+## hyphop ##
+
+if ( -f $ARGV[0] ) {
+    open IN, shift;
+}
+else {
+    open IN, "<&STDIN";
+}
+
+sysread IN, $_, 1024 * 1024;
+
+#syswrite STDOUT,
+our $data     = unpack "H*" => $_;
+our $data_len = length $data;
+our $o        = 0;
+our $bs       = 32;
+our $blocks   = $data_len / $bs;
+
+warn "$data_len bytes, $blocks blocks\n";
+
+#open OUT, "STDIN";
+
+while ( $blocks-- > 0 ) {
+    printf "%04X: %s\n", $o/2, substr $data, $o, $bs;
+    $o += $bs;
+}

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+## hyphop ##
+
+#2048*512 = 1048576
+#1024^2   = 1048576 = 1MB
+
+cnt=$2
+
+[ "$1" = "yes" ] || { echo "USAGE: $0 yes [blocks]"; exit 0; } 
+[ "$cnt" = "" ] && cnt=2047
+
+dev=/dev/mmcblk0
+cmd="dd if=/dev/zero bs=512 count=$cnt of=$dev"
+echo $cmd
+$cmd
+

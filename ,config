@@ -11,15 +11,24 @@ patches=uboot-patches
 dtc=../dtc
 conf=orangepi_zero_hyphop_mizy_defconfig
 
+logs=logs
+
 tc_gcc=OpenWrt-Toolchain-imx6_gcc-5.3.0_musl-1.1.16_eabi.Linux-x86_64
-tc_gcc_dir=toolchain-arm_cortex-a9+neon_gcc-5.3.0_musl-1.1.16_eabi
+tc_gcc_dir=toolchain-arm_cortex-a9+neon_gcc-5.3.0_musl-1.1.15_eabi
+#tc_gcc_dir=toolchain-arm_cortex-a9+neon_gcc-5.3.0_musl-1.1.16_eabi
 tc_src=https://downloads.openwrt.org/snapshots/trunk/imx6/generic/$tc_gcc.tar.bz2
+tc_gcc_squash=toolchain-arm_cortex-a9+neon_gcc-5.3.0_musl-1.1.15_eabi.squashfs
+
+squash_src=$src.squashfs
 
 export ARCH=arm
 export CROSS_COMPILE=arm-openwrt-linux-
 export bdir=$PWD
 export STAGING_DIR=$PWD/../$tc_gcc_dir
-#export STAGING_DIR=$PWD/../toolchain-arm_cortex-a9+neon_gcc-5.3.0_musl-1.1.15_eabi
 
 export PATH=$STAGING_DIR/bin/:$PATH
 export PATH=$PWD/$dtc:$PATH
+
+mizy_logo_addr_f=.mizy_logo_addr
+
+uboot_make_args=

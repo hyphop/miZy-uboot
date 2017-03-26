@@ -1,0 +1,27 @@
+--- uboot-mizy.ro/arch/arm/lib/bootm.c	2017-02-08 10:11:05.000000000 +0700
++++ uboot-mizy.rw/arch/arm/lib/bootm.c	2017-03-11 00:13:07.007692752 +0700
+@@ -75,7 +75,7 @@ __weak void board_quiesce_devices(void)
+  */
+ static void announce_and_cleanup(int fake)
+ {
+-	printf("\nStarting kernel ...%s\n\n", fake ?
++	printf("\nStarting kernel....%s\n\n", fake ?
+ 		"(fake run for tracing)" : "");
+ 	bootstage_mark_name(BOOTSTAGE_ID_BOOTM_HANDOFF, "start_kernel");
+ #ifdef CONFIG_BOOTSTAGE_FDT
+@@ -206,7 +206,14 @@ static void do_nonsec_virt_switch(void)
+ /* Subcommand: PREP */
+ static void boot_prep_linux(bootm_headers_t *images)
+ {
+-	char *commandline = getenv("bootargs");
++
++	char *commandline;
++	commandline = getenv("bootargs");
++	ulong msecs=get_timer(0);
++	sprintf( commandline, "%s %s=%ld.%03d", getenv("bootargs"), "btime", 
++	 msecs / 1000, (int)(msecs % 1000));
++
++	//printf("ARGS: %s", commandline);
+ 
+ 	if (IMAGE_ENABLE_OF_LIBFDT && images->ft_len) {
+ #ifdef CONFIG_OF_LIBFDT

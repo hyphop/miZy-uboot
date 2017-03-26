@@ -1,0 +1,14 @@
+#!/bin/sh
+
+## hyphop ##
+
+dev=/dev/mmcblk0
+ptf=mmc_part_table_512b.bin
+
+pt=$2; [ "$pt" = "" ] && pt=$ptf
+
+[ "$1" = "yes" ] || { echo "USAGE: $0 yes [$pt]"; exit 0; } 
+
+cmd="dd if=$pt bs=512 count=1 of=$dev"
+echo $cmd
+$cmd

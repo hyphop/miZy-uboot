@@ -1,0 +1,19 @@
+#!/usr/bin/perl
+
+## hyphop ##
+
+open $IN, "<&STDIN";
+
+print "unsigned char mizy_data[] __initdata = {
+";
+
+while ( sysread $IN, $_, 10 ) {
+#    warn "asd\n";
+    @_ = map { sprintf "0x%02X", ord $_ } split //;
+    print join ", " => @_, "\n";
+#    print "\n";
+}
+
+#print "0x00 };
+#";
+

@@ -1,0 +1,20 @@
+#!/bin/sh
+
+## hyphop ## 
+
+. ./,config
+
+ 
+p=$PWD
+p=.
+
+[ -d $src ] || mkdir $src
+
+#sfs=$src.squashfs
+sfs=$squash_src
+
+ro_level=$p/$src.ro
+rw_level=$p/$src.rw
+
+umount $src
+umount $ro_level

@@ -1,0 +1,23 @@
+#!/bin/sh
+
+## hyphop ##
+
+#. ./,config
+
+#export LOGO_BMP=$bdir/logo.bmp
+
+src=uboot-mizy
+ok=1
+
+#export ARCH=
+#export CROSS_COMPILE=
+
+[ "$ok" ] && {
+    echo "[i] build"
+    time make  -C $src "$@"
+    echo "[i] info"
+}
+
+cd $src 
+
+#./test/py/test.py --bd sandbox --build

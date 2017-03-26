@@ -4,13 +4,41 @@
 
 . ./,config
 
-time make -j 16 -C $src
+#export LOGO_BMP=$bdir/logo.bmp
+
+ok=1
+
+[ "$ok" ] && {
+    echo "[i] build ubot + args $uboot_make_args"
+    #CONFIG_LZ4=1
+    time make -j 32 -C $src $uboot_make_args $@ > $logs/uboot.log
+    echo "[i] info"
+}
 
 uboot=`readlink u-boot-sunxi-with-spl-i2c-mizy.bin`
 
-echo "=="
-echo "OUTPUT $uboot"
+uboot_size=`stat --printf %s $uboot`
 
-ls -l1 $uboot
+echo "[i] uboot size: $uboot_size bytes => $uboot"
+
+#ls -l1 $uboot
+
+for addr in `grep -E "linux_logo$" $src/u-boot.sym`; do
+    mizy_logo_addr=$addr
+    break
+done
+
+#mizy_logo_addr_f=.mizy_logo_addr
+
+f=`readlink $mizy_logo_addr_f`
+d=`dirname $f`
+[ -d $d ] || mkdir -p $d
+
+echo -n $mizy_logo_addr > $mizy_logo_addr_f
+echo "[i] miZy logo addr: $mizy_logo_addr => $mizy_logo_addr_f => $f"
+
 #file $uboot
 
+./tools/uboot_fel_imp $uboot
+
+[ -d ../miZy/ ] && cd ../miZy/ && ./uboot_fix_run

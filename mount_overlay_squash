@@ -1,0 +1,29 @@
+#!/bin/sh
+
+## hyphop ## 
+
+. ./,config
+
+modprobe overlayfs
+ 
+p=$PWD
+p=.
+
+[ -d $src ] || mkdir $src
+
+#sfs=$src.squashfs
+sfs=$squash_src
+
+ro_level=$p/$src.ro
+rw_level=$p/$src.rw
+
+[ -d $ro_level ] || mkdir $ro_level
+[ -d $rw_level ] || mkdir $rw_level
+
+work_dir=$p/$src
+
+mount -o ro $sfs $ro_level
+
+mount -t overlayfs \
+    -o lowerdir=$ro_level,upperdir=$rw_level \
+    none $work_dir

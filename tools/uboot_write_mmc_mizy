@@ -1,0 +1,15 @@
+#!/bin/sh
+
+## hyphop ##
+
+./uboot_write_mmc yes ../../miZy/,out/u-boot-mizi.bin
+
+echo "
+
+dd if=../../miZy/,out/u-boot-mizi.bin bs=8192 seek=1 conv=notrunc of=/dev/mmcblk0
+==WRITE ../../miZy/,out/u-boot-mizi.bin => /dev/mmcblk0
+57+1 records in
+57+1 records out
+466982 bytes (467 kB) copied, 0.0562724 s, 8.3 MB/s
+
+"

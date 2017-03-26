@@ -1,0 +1,27 @@
+#!/bin/sh
+
+## hyphop ##
+
+[ "$dev" = "" ] && dev=/dev/mmcblk0
+tmp_mmc=/tmp/fel_boot.mmc.bin
+
+bs=8192
+mmc_offset=1 # 1 block = 8192 bytes
+
+a="bs=$bs count=1"
+
+dd if=$dev $a skip=$mmc_offset of=$tmp_mmc 2>$tmp_mmc.log
+
+export tmp=/tmp/fel_boot.ok.bin
+
+`dirname $0`/fel_boot_write_mmc yes test noback || exit 0
+
+md5sum $tmp
+md5sum $tmp_mmc
+#no 0829f71740aab1ab98b33eae21dee122
+
+diff $tmp $tmp_mmc && { echo "OK $dev have already good fel boot loader"; exit 0; }
+
+echo "NO! its different" >&2
+
+exit 1

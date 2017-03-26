@@ -1,6 +1,14 @@
-diff -pruN uboot-mizy/drivers/i2c/soft_i2c.c uboot-miZy/drivers/i2c/soft_i2c.c
---- uboot-mizy/drivers/i2c/soft_i2c.c	2017-02-08 10:11:06.000000000 +0700
-+++ uboot-miZy/drivers/i2c/soft_i2c.c	2017-02-01 21:04:49.000000000 +0700
+--- uboot-mizy.ro/drivers/i2c/soft_i2c.c	2017-02-08 10:11:06.000000000 +0700
++++ uboot-mizy.rw/drivers/i2c/soft_i2c.c	2017-03-13 15:58:06.931584243 +0700
+@@ -419,7 +419,7 @@ static int  soft_i2c_read(struct i2c_ada
+ static int  soft_i2c_write(struct i2c_adapter *adap, uchar chip, uint addr,
+ 			int alen, uchar *buffer, int len)
+ {
+-	int shift, failures = 0;
++	int failures = 0;
+ 
+ 	PRINTD("i2c_write: chip %02X addr %02X alen %d buffer %p len %d\n",
+ 		chip, addr, alen, buffer, len);
 @@ -430,16 +430,17 @@ static int  soft_i2c_write(struct i2c_ad
  		PRINTD("i2c_write, no chip responded %02X\n", chip);
  		return(1);

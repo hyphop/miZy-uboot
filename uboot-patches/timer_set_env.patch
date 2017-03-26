@@ -1,0 +1,17 @@
+--- uboot-mizy.ro/cmd/misc.c	2017-02-08 10:11:06.000000000 +0700
++++ uboot-mizy.rw/cmd/misc.c	2017-03-09 19:42:03.122981597 +0700
+@@ -71,7 +71,13 @@ static int do_timer(cmd_tbl_t *cmdtp, in
+ 
+ 	if (!strcmp(argv[1], "get")) {
+ 		ulong msecs = get_timer(start) * 1000 / CONFIG_SYS_HZ;
+-		printf("%ld.%03d\n", msecs / 1000, (int)(msecs % 1000));
++		char timerval[10];
++		sprintf(timerval, "%ld.%03d", msecs / 1000, (int)(msecs % 1000));
++		//printf("%ld.%03d\n", msecs / 1000, (int)(msecs % 1000));
++
++		printf("%s\n", timerval);
++		setenv("timerval", timerval);
++
+ 	}
+ 
+ 	return 0;

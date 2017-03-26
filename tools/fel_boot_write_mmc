@@ -1,0 +1,102 @@
+#!/bin/sh
+
+## hyphop ##
+
+[ "$dev" = "" ] && dev=/dev/mmcblk0
+[ "$tmp" = "" ] && tmp=/tmp/fel_boot.bin
+[ "$bak" = "" ] && bak=/tmp/fel_boot.bak
+
+bs=8192
+mmc_offset=1 # 1 block = 8192 bytes
+
+
+usage() { echo "\
+$0 - write/clear/reset spl fel boot loader on mmc
+
+USAGE
+    $0 yes|no|res [test] [noback]
+
+EXAMPLES
+
+WRITE:	$0 yes			
+CLEAR:	dev=/dev/mmcblk0 $0 no	
+
+PATHS
+    mmc device: $dev
+    tmp data  : $tmp
+    mmc packup: $bak
+
+NOTE
+    reset work if backup stored at the end of spl block
+    try to use uboot_write_mmc if restore dosnt work
+
+"
+}
+
+hdr="hd -R" # busybox
+which xxd 1>/dev/null && { d=":"; hdr="xxd -r" ; } 
+
+a="bs=$bs count=1 conv=notrunc"
+
+mode=$1
+
+echo "MODE: $mode"
+
+sunxi_fel_boot() {
+echo "\
+0000$d 06 00 00 ea 65 47 4f 4e 2e 42 54 30 97 0e 6e 27
+0010$d 00 20 00 00 53 50 4c 01 00 00 00 00 00 00 00 00
+0020$d 02 00 00 ea 00 f0 20 e3 00 f0 20 e3 00 f0 20 e3
+0030$d 10 0f 11 ee 02 0a 10 e3 20 e0 a0 03 00 e0 1f 15
+0040$d 1e ff 2f e1 20 00 ff ff 00 00 00 00 00 00 00 00
+"
+}
+
+dd if=/dev/zero $a of=$tmp 2>$tmp.log
+
+testdev(){
+    [ -b $dev ] || { echo "[e] not found valid device $dev"; exit 1; }
+}
+
+case $mode in 
+    yes)
+    sunxi_fel_boot | $hdr | dd conv=notrunc of=$tmp 2>>$tmp.log
+    ;;
+    res)
+    testdev
+    # 8192*1 skip
+    # +
+    # 8192*(3+1) = 32768
+    # 
+    dd if=$dev bs=8192 count=1 skip=4 of=$tmp
+    ;;
+    no)
+    ;;
+    *)
+    usage ; exit 0;
+esac
+
+md5sum $tmp
+ls $tmp
+hd $tmp | head -n10
+
+
+# disable bakup
+[ "$3" = "" ] && { echo "[i] store backup to: $bak";
+dd if=$dev $a skip=$mmc_offset of=$bak 2>$bak.log;  } 
+
+# test not write
+[ "$2" = "" ] || { echo "[i] test mode => $tmp"; exit 0; }
+
+testdev
+
+echo "write $tmp => $dev"
+
+dd if=$tmp $a seek=$mmc_offset of=$dev 2>>$tmp.log
+
+sync
+
+echo "==LOG > $tmp.log"
+
+tail -n3 $tmp.log
+

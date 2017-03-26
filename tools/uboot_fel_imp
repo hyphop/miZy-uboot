@@ -1,0 +1,27 @@
+#!/bin/sh
+
+## hyphop ##
+
+# exit 0
+
+echo "[i] make reserve copy for spl header to last block" 1>&2
+
+d=`dirname $0`
+
+#8192 * 4 = 32768
+#24576 + 8192 = 32768
+
+spl_max_size=24576
+
+[ -f $1 ] || {
+    echo "[e] not found $1" >&2
+    exit 0
+}
+
+# only if last block empty!
+# make backup for spl header to last block
+
+cmd="dd if=$1 bs=8192 count=1 seek=3 conv=notrunc of=$1"
+
+echo $cmd
+$cmd

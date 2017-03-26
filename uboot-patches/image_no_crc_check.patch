@@ -1,0 +1,143 @@
+--- uboot-mizy.ro/common/image.c	2017-02-08 10:11:06.000000000 +0700
++++ uboot-mizy.rw/common/image.c	2017-03-09 22:27:29.335322916 +0700
+@@ -415,12 +415,13 @@ static const image_header_t *image_get_r
+ 	bootstage_mark(BOOTSTAGE_ID_RD_MAGIC);
+ 	image_print_contents(rd_hdr);
+ 
+-	if (verify) {
++//	if (verify) {
++	if (0) {
+ 		puts("   Verifying Checksum ... ");
+ 		if (!image_check_dcrc(rd_hdr)) {
+ 			puts("Bad Data CRC\n");
+-			bootstage_error(BOOTSTAGE_ID_RD_CHECKSUM);
+-			return NULL;
++		//	bootstage_error(BOOTSTAGE_ID_RD_CHECKSUM);
++		//	return NULL;
+ 		}
+ 		puts("OK\n");
+ 	}
+--- uboot-mizy.ro/common/bootm.c	2017-02-08 10:11:06.000000000 +0700
++++ uboot-mizy.rw/common/bootm.c	2017-03-09 22:20:48.527309134 +0700
+@@ -751,21 +751,23 @@ static image_header_t *image_get_kernel(
+ 	if (!image_check_hcrc(hdr)) {
+ 		puts("Bad Header Checksum\n");
+ 		bootstage_error(BOOTSTAGE_ID_CHECK_HEADER);
+-		return NULL;
++//		return NULL;
+ 	}
+ 
+ 	bootstage_mark(BOOTSTAGE_ID_CHECK_CHECKSUM);
+ 	image_print_contents(hdr);
+ 
+-	if (verify) {
++//	if (verify) {
++	if (0) {
+ 		puts("   Verifying Checksum ... ");
+ 		if (!image_check_dcrc(hdr)) {
+ 			printf("Bad Data CRC\n");
+ 			bootstage_error(BOOTSTAGE_ID_CHECK_CHECKSUM);
+-			return NULL;
++//			return NULL;
+ 		}
+ 		puts("OK\n");
+ 	}
++	
+ 	bootstage_mark(BOOTSTAGE_ID_CHECK_ARCH);
+ 
+ 	if (!image_check_target_arch(hdr)) {
+--- uboot-mizy.ro/cmd/bootm.c	2017-02-08 10:11:06.000000000 +0700
++++ uboot-mizy.rw/cmd/bootm.c	2017-03-09 20:09:28.079038160 +0700
+@@ -252,12 +252,12 @@ static int image_info(ulong addr)
+ 		puts("   Legacy image found\n");
+ 		if (!image_check_magic(hdr)) {
+ 			puts("   Bad Magic Number\n");
+-			return 1;
++//			return 1;
+ 		}
+ 
+ 		if (!image_check_hcrc(hdr)) {
+ 			puts("   Bad Header Checksum\n");
+-			return 1;
++//			return 1;
+ 		}
+ 
+ 		image_print_contents(hdr);
+@@ -265,7 +265,7 @@ static int image_info(ulong addr)
+ 		puts("   Verifying Checksum ... ");
+ 		if (!image_check_dcrc(hdr)) {
+ 			puts("   Bad Data CRC\n");
+-			return 1;
++//			return 1;
+ 		}
+ 		puts("OK\n");
+ 		return 0;
+--- uboot-mizy.ro/cmd/source.c	2017-02-08 10:11:06.000000000 +0700
++++ uboot-mizy.rw/cmd/source.c	2017-03-13 15:58:55.379585909 +0700
+@@ -34,7 +34,7 @@ source (ulong addr, const char *fit_unam
+ 	const image_header_t *hdr;
+ #endif
+ 	u32		*data;
+-	int		verify;
++//	int		verify;
+ 	void *buf;
+ #if defined(CONFIG_FIT)
+ 	const void*	fit_hdr;
+@@ -43,7 +43,8 @@ source (ulong addr, const char *fit_unam
+ 	size_t		fit_len;
+ #endif
+ 
+-	verify = getenv_yesno ("verify");
++//	verify = getenv_yesno ("verify");
++//	verify = 0;
+ 
+ 	buf = map_sysmem(addr, 0);
+ 	switch (genimg_get_format(buf)) {
+@@ -52,32 +53,36 @@ source (ulong addr, const char *fit_unam
+ 		hdr = buf;
+ 
+ 		if (!image_check_magic (hdr)) {
+-			puts ("Bad magic number\n");
+-			return 1;
++//			puts ("Bad magic number\n");
++			printf("Bad magic number\n");
++//			return 1;
+ 		}
+ 
+ 		if (!image_check_hcrc (hdr)) {
+-			puts ("Bad header crc\n");
+-			return 1;
++//			puts ("Bad header crc\n");
++			printf("Bad header crc\n");
++//			return 1;
+ 		}
+ 
+-		if (verify) {
++//		if (verify) {
+ 			if (!image_check_dcrc (hdr)) {
+-				puts ("Bad data crc\n");
+-				return 1;
++//				puts ("Bad data crc\n");
++				printf("Bad data crc\n");
++///				return 1;
+ 			}
+-		}
++//		}
+ 
+ 		if (!image_check_type (hdr, IH_TYPE_SCRIPT)) {
+-			puts ("Bad image type\n");
+-			return 1;
++//			puts ("Bad image type\n");
++			printf("Bad image type\n");
++//			return 1;
+ 		}
+ 
+ 		/* get length of script */
+ 		data = (u32 *)image_get_data (hdr);
+ 
+ 		if ((len = uimage_to_cpu (*data)) == 0) {
+-			puts ("Empty Script\n");
++			printf ("Empty Script\n");
+ 			return 1;
+ 		}
+ 
