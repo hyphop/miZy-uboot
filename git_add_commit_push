@@ -5,7 +5,7 @@
 
 msg="$@"
 
-[ "$msg" = "" ] || msg=`date`
+[ "$msg" = "" ] && msg=`date`
 
 echo "git add -A && git commit -m $msg && git push"
 
