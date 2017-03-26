@@ -51,7 +51,6 @@ toolchain-arm_cortex-a9+neon_gcc-5.3.0_musl-1.1.15_eabi
 
 ## miZy 
  
-![miZy](pics/miZy.logo.wb128x64x2.png)
 miZy - open source minimalistic tiny fast embedded Linux system, (for sunxi Orange Pi Zero, another sunxi boards maybe work too )
 
 ## NOTES
@@ -63,3 +62,7 @@ wellcome to join and improve & tidy this code.
 
 - [https://github.com/hyphop/miZy-uboot](https://github.com/hyphop/miZy-uboot)
 - [https://hyphop.github.io/mizy/](https://hyphop.github.io/mizy/)
+
+## ;)
+
+![miZy](pics/miZy.logo.wb128x64x2.png)
