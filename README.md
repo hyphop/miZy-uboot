@@ -65,4 +65,4 @@ wellcome to join and improve & tidy this code.
 
 ## ;)
 
-![miZy](pics/miZy.logo.wb128x64x2.png)
+![miZy](pics/miZy.logo.bw128x64x2.png)
