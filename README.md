@@ -42,12 +42,12 @@ we have tested on W25q128 spi flash, and this worked well!
 
 ## Output
 
-u-boot-sunxi-with-spl0-i2c-mizy.bin -> ./uboot-mizy/u-boot-sunxi-with-spl.bin
+u-boot-sunxi-with-spl-i2c-mizy.bin -> ./uboot-mizy/u-boot-sunxi-with-spl.bin
     
 ## Deps and cross compilation
 
-toolchain-arm_cortex-a9+neon_gcc-5.3.0_musl-1.1.15_eabi
-...
+* dtc v1.4.3
+* toolchain-arm_cortex-a9+neon_gcc-5.3.0_musl-1.1.15_eabi
 
 ## miZy 
  
