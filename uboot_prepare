@@ -5,6 +5,7 @@
 . ./,config
 
 [ -d $logs ] || mkdir $logs
+[ -d ../bin/uboot ] || mkdir -p ../bin/uboot
 
 [ -s $src/Makefile ] || {
 # prefer squashfs source
@@ -45,7 +46,12 @@
 
 arm-openwrt-linux-gcc --version 2>/dev/null 1>/dev/null || {
 
+    [ -s ../$tc_gcc_squash ] || {
+	wget $squash_tc_link -O ../$squash_tc_name
+    }
+
     [ -s ../$tc_gcc_squash ] && {
+	[ -d ../$tc_gcc_dir ] || mkdir ../$tc_gcc_dir
 	cmd="mount -o ro ../$tc_gcc_squash ../$tc_gcc_dir"
 	echo $cmd
 	$cmd
