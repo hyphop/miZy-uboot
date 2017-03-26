@@ -12,7 +12,7 @@ Its just a part of miZy project, and same as other our parts can standalone used
 * **i2c** available on TWI0 (PA11 PA12)
 * **splash screen** on **ssd1306** i2c OLED 128x64 display TWI0 connected
 * ready for uboot splash screen customization
-* **FEL mode** - set or disable fel or restore normal spl boot, direct from uboot shell
+* can fix (set or disable) **FEL mode** direct from uboot shell (write or clear FEL-loader on mmc)
 * support any **LZMA LZO GZIP** uboot packed images, and direct as uboot shell cmd
 * accept uboot images with bad crc 
 * fast advanced configuration for build-in uboot environment, without recompilation
