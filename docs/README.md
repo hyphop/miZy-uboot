@@ -1,5 +1,5 @@
 ## miZy additional commands for uboot
 
-notes not writed now! plz wait some time ;)
+* spiread.md - https://github.com/hyphop/miZy-uboot/blob/master/docs/spiread.md
 
-
+documentations not complited...
