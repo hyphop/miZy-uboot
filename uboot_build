@@ -9,9 +9,9 @@
 ok=1
 
 [ "$ok" ] && {
-    echo "[i] build ubot + args $uboot_make_args"
+    echo "[i] build uboot + args $uboot_make_args"
     #CONFIG_LZ4=1
-    time make -j 32 -C $src $uboot_make_args $@ > $logs/uboot.log
+    time make -j 16 -C $src $uboot_make_args $@ > $logs/uboot.log
     echo "[i] info"
 }
 
