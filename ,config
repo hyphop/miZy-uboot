@@ -23,7 +23,7 @@ squash_tc_base=https://github.com/hyphop/pkg/releases/download/arm-gcc
 squash_tc_name=$tc_gcc_squash
 squash_tc_link="$squash_tc_base/$squash_tc_name"
 
-squash_src=$src.squashfs
+squash_src=uboot-origin.squashfs
 squash_src_base=https://github.com/hyphop/pkg/releases/download/uboot
 squash_src_name=uboot-v2017.01.squashfs
 #squash_src_link=https://github.com/hyphop/pkg/releases/download/uboot/uboot-v2017.01.squashfs
@@ -40,3 +40,6 @@ export PATH=$PWD/$dtc:$PATH
 mizy_logo_addr_f=.mizy_logo_addr
 
 uboot_make_args=
+
+uboot_mizy="uboot-mizy.bin"
+

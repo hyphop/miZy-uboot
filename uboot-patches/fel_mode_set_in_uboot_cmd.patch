@@ -79,7 +79,7 @@
 +}
 +
 +
-+static int do_felret(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
++static int do_felrun(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 +{
 +
 +    //return_to_fel(fel_stash.sp, fel_stash.lr);
@@ -95,11 +95,11 @@
 +"	1 - on    - write FEL mode loader to mmc\n"
 +"	2 - off   - try to restore normal uboot loader on mmc\n"
 +"	3 - clear - remove any boot loader from mmc\n"
-+"	4 - backup- mmc boot loader to SPL last block\n"
++"	4 - backup- help save boot loader to SPL last block on mmc\n"
 +);
 +
 +U_BOOT_CMD(
-+	felret,	1,	1,	do_felret,
-+	"return to FEL mode",
++	felrun,	1,	1,	do_felrun,
++	"return/go to FEL mode",
 +	""
 +);

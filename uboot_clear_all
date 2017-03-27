@@ -1,0 +1,21 @@
+#!/bin/sh
+
+## hyphop ##
+
+. ./,config
+
+echo "[i] safety clear all uboot building data!"
+
+./umount_overlay
+
+p=.
+
+#src=uboot-mizy
+
+# try to make it safety
+[ "$src" = "" ] && exit 1
+[ -d "$p/$src.rw" ] || exit 2
+[ -d "$p/$src.ro" ] || exit 3
+[ -d "$p/$src" ] || exit 4
+rm -r $p/$src.rw && rm -r $p/$src.ro && rm -r $p/$src
+

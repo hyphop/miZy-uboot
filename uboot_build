@@ -41,4 +41,11 @@ echo "[i] miZy logo addr: $mizy_logo_addr => $mizy_logo_addr_f => $f"
 
 ./tools/uboot_fel_imp $uboot
 
+p=$PWD
 [ -d ../miZy/ ] && cd ../miZy/ && ./uboot_fix_run
+cd $p
+
+uboot_there=`readlink $uboot_mizy`
+cmd="cp $uboot $uboot_there"
+echo $cmd
+$cmd && echo "get compiled uboot there $uboot_mizy => $uboot_there"

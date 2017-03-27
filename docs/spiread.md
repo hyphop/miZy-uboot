@@ -1,7 +1,8 @@
-# spiread 
+# spiread
 
-read data by bytes from sunxi spi-flash to ram
-
+spiread - read data by bytes from sunxi spi-flash to ram,
+avail in uboot shell cmd for next linux loading
+    
 ## USAGE
 
 spiread HEX_DST DEC_OFFSET DEC_BYTES
@@ -61,6 +62,23 @@ check readed 0x40 bytes uboot-header data from spi-flash
     00000010: 4a 00 00 00 00 00 00 00 96 ab 7d 10 11 02 05 00    J.........}.....
     00000020: 55 2d 42 6f 6f 74 20 32 30 31 37 2e 30 31 2d 68    U-Boot 2017.01-h
     00000030: 79 70 68 6f 70 20 6d 69 5a 79 20 66 6f 72 20 73    yphop miZy for s
+
+## HOWTO LOAD LINUX
+
+add some strings like this to uboot script for loading linux from spi-flash
+
+    spiread.hd ${kernel_addr_r} ${kernel_offset} ${kernel_size}
+    spiread.hd ${ramdisk_addr_r} ${ramdisk_offset} ${ramdisk_size}
+    spiread.hd ${fdt_addr_r} ${fdt_offset} ${fdt_size}
+    bootm ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr_r}
+
+be sure all reuired env vars have actual values!!!
+
+## READ IMAGES NOTE
+
+if u dont know real kernel_size or ramdisk_size or fdt_size u can read some extra data
+(for example read full mtd part which contain it), because image packed by mkimage and actual 
+image size already store in mkimage header, and they must unpacked corretly!
     
 ## SPEED
 

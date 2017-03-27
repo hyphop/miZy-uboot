@@ -6,5 +6,6 @@
 
 echo "make defconfig $conf"
 
-make -C $src defconfig $conf CONFIG_LZ4=y
+#make -C $src defconfig $conf CONFIG_LZ4=y
+make -C $src defconfig $conf
 

@@ -28,7 +28,7 @@ by default device can not have SPI flash or have only 2M bytes (mx25l1606e its e
 needed re/install SPI flash to 4M or 8M or 16M bytes if u need  full load linux from spi-flash. For example 
 we have tested on W25q128 spi flash, and this worked well!
 
-## Get Source, Prepare & Build - need only 10-30 sec for build uboot
+## Get Source, Prepare, Build & Clear - need only 10-30 sec for build uboot
 
     cd /tmp
     mkdir zero_builder
@@ -39,6 +39,11 @@ we have tested on W25q128 spi flash, and this worked well!
 
     ./uboot_prepare
     ./uboot_build
+
+if everything is ok, compilled uboot must be there ./uboot-minzy.bin, and ready for usage!
+now we can clear building data.
+
+    ./uboot_clear_all
 
 ## Output
 
