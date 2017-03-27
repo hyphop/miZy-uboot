@@ -28,7 +28,7 @@ grep overlayfs /proc/filesystems 1>/dev/null || {
 }
 
 #override mode
-ovlmod=aufs
+#ovlmod=aufs
  
 p=$PWD
 p=.
