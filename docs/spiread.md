@@ -51,6 +51,17 @@ read full 8M and 16M flash to 0x00000000 addr
     => spiread.h 0 0 1000000
     SPI readed 16777216 bytes from 0 offset, time 10.676
 
+check readed 0x40 bytes uboot-header data from spi-flash
+
+    => mw.b 0 FF 40
+    => spiread.h 0 8000 40 
+    SPI readed 64 bytes from 32768 offset, time 0.000
+    => md.b 0 40
+    00000000: 27 05 19 56 2d d0 13 d2 58 d5 22 de 00 06 92 2e    '..V-...X.".....
+    00000010: 4a 00 00 00 00 00 00 00 96 ab 7d 10 11 02 05 00    J.........}.....
+    00000020: 55 2d 42 6f 6f 74 20 32 30 31 37 2e 30 31 2d 68    U-Boot 2017.01-h
+    00000030: 79 70 68 6f 70 20 6d 69 5a 79 20 66 6f 72 20 73    yphop miZy for s
+    
 ## SPEED
 
     sunxi spi-flash reading speed is about 1.5 - 1.78 Mb/s
