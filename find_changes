@@ -12,7 +12,7 @@ r=$src.ro
 
 mode=$1
 ext=$2
-[ "$ext" = "" ] && ext=c
+[ "$ext" = "" ] && ext="*.c"
 
 out="&1"
 
@@ -21,7 +21,7 @@ out="&1"
     i=0
 }
 
-for f in `find $w -type f -name \*.$ext -printf %P\\\\n`; do
+for f in `find $w -type f -name $ext -printf %P\\\\n`; do
 
     printf "== %-32s ==> %2s\n" $f $i 1>&2
     

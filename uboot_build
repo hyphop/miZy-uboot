@@ -8,6 +8,8 @@
 
 ok=1
 
+#dtc="dtc.bin -W no-unit_address_vs_reg"
+
 [ "$ok" ] && {
     echo "[i] build uboot + args $uboot_make_args"
     #CONFIG_LZ4=1

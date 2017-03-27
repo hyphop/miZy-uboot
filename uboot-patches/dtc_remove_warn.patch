@@ -1,0 +1,11 @@
+--- uboot-mizy.ro/Makefile	2017-02-08 10:11:05.000000000 +0700
++++ uboot-mizy.rw/Makefile	2017-03-27 15:54:37.786496980 +0700
+@@ -349,7 +349,7 @@ OBJDUMP		= $(CROSS_COMPILE)objdump
+ AWK		= awk
+ PERL		= perl
+ PYTHON		= python
+-DTC		= dtc
++DTC		= dtc -W no-unit_address_vs_reg
+ CHECK		= sparse
+ 
+ CHECKFLAGS     := -D__linux__ -Dlinux -D__STDC__ -Dunix -D__unix__ \
