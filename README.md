@@ -47,8 +47,8 @@ now we can clear building data.
 
 ## Output
 
-u-boot-sunxi-with-spl.bin -> ./uboot-mizy/u-boot-sunxi-with-spl.bin
-uboot-mizy.bin -> **../bin/uboot/uboot-mizy.bin**
+* u-boot-sunxi-with-spl.bin -> ./uboot-mizy/u-boot-sunxi-with-spl.bin
+* uboot-mizy.bin -> **../bin/uboot/uboot-mizy.bin**
     
 ## Deps and cross compilation
 
