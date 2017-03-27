@@ -1,6 +1,0 @@
-#!/bin/sh
-rsync -av $@ \
-    --exclude=uboot-mizy*/ \
-    --exclude=logs/* \
-    * \
-    /mnt/1024-temp/githup/hyphop/miZy-uboot

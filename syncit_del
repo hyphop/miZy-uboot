@@ -1,3 +1,0 @@
-#!/bin/sh
-[ "$1" != "yes" ] && echo "USAGE $0 yes" && exit 0
-./syncit --delete
