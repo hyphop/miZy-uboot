@@ -1,8 +1,8 @@
-= spiread 
+# spiread 
 
 read data by bytes from sunxi spi-flash to ram
 
-== USAGE
+## USAGE
 
 spiread HEX_DST DEC_OFFSET DEC_BYTES
 
@@ -10,19 +10,19 @@ spiread HEX_DST DEC_OFFSET DEC_BYTES
 * OFFSET  - offset in bytes from begin of flash
 * BYTES   - how many bytes read from flash to mem by addr HEX_DST
 
-== EXTENSIONS
+## EXTENSIONS
 
 * spiread.h  - hex_dst hex_offset hex_bytes
 * spiread.d  - hex_dst dec_offset dec_bytes
 * spiread.dh - hex_dst dec_offset hex_bytes
 * spiread.hd - hex_dst hex_offset dec_bytes
 
-== NOTE 
+## NOTE 
 
 
 spiread.d work same as spiread - offset and bytes in dec
 
-== EXAMPLES
+## EXAMPLES
 
 read 1048576 bytes from begin spi-flash to 0x42000000 addr
 
@@ -51,7 +51,7 @@ read full 8M and 16M flash to 0x00000000 addr
     => spiread.h 0 0 1000000
     SPI readed 16777216 bytes from 0 offset, time 10.676
 
-== SPEED
+## SPEED
 
     sunxi spi-flash reading speed is about 1.5 - 1.78 Mb/s
 
