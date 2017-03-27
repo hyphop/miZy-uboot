@@ -40,14 +40,15 @@ we have tested on W25q128 spi flash, and this worked well!
     ./uboot_prepare
     ./uboot_build
 
-if everything is ok, compilled uboot must be there ./uboot-minzy.bin, and ready for usage!
+if everything is ok, compilled uboot must be there **./uboot-mizy.bin**, and ready for usage!
 now we can clear building data.
 
     ./uboot_clear_all
 
 ## Output
 
-u-boot-sunxi-with-spl-i2c-mizy.bin -> ./uboot-mizy/u-boot-sunxi-with-spl.bin
+u-boot-sunxi-with-spl.bin -> ./uboot-mizy/u-boot-sunxi-with-spl.bin
+uboot-mizy.bin -> **../bin/uboot/uboot-mizy.bin**
     
 ## Deps and cross compilation
 
