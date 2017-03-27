@@ -11,11 +11,14 @@ ok=1
 [ "$ok" ] && {
     echo "[i] build uboot + args $uboot_make_args"
     #CONFIG_LZ4=1
-    time make -j 16 -C $src $uboot_make_args $@ > $logs/uboot.log
+    time make -j 16 -C $src $uboot_make_args $@ > $logs/uboot.log || {
+	echo "[i] try to fix errors first";
+	exit 1
+    }
     echo "[i] info"
 }
 
-uboot=`readlink u-boot-sunxi-with-spl-i2c-mizy.bin`
+uboot=`readlink u-boot-sunxi-with-spl.bin`
 
 uboot_size=`stat --printf %s $uboot`
 
