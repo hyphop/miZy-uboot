@@ -8,6 +8,7 @@
 [ -d ../bin/uboot ] || mkdir -p ../bin/uboot
 [ -d ,tmp ] || mkdir -p ,tmp
 
+
 [ -s $src/Makefile ] || {
 # prefer squashfs source
     [ -s $squash_src ] || {
@@ -76,3 +77,4 @@ cp -a ../$add/* .
 cd ..
 
 ./uboot_defconfig
+

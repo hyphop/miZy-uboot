@@ -13,7 +13,7 @@ Its just a part of miZy project, and same as other our parts can standalone used
 * **splash screen** on **ssd1306** i2c OLED 128x64 display TWI0 connected
 * ready for uboot splash screen customization
 * can fix (set or disable) **FEL mode** direct from uboot shell (write or clear FEL-loader on mmc)
-* support any **LZMA LZO GZIP** uboot packed images, and direct as uboot shell cmd
+* support any **LZMA LZO GZIP** uboot packed images, and directly from uboot shell cmds
 * accept uboot images with bad crc 
 * fast advanced configuration for build-in uboot environment, without recompilation
 * ready for next **USB loading** from any 3 usb ports
@@ -39,6 +39,8 @@ we have tested on W25q128 spi flash, and this worked well!
 
     ./uboot_prepare
     ./uboot_build
+
+    echo START; mkdir /tmp/zero_builder; cd /tmp/zero_builder; date ; git clone https://github.com/hyphop/miZy-uboot; cd miZy-uboot; ./uboot_prepare; ./uboot_build; date; echo "END"
 
 if everything is ok, compilled uboot must be there **./uboot-mizy.bin**, and ready for usage!
 now we can clear building data.

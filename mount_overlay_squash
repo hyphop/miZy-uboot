@@ -12,7 +12,7 @@ grep squashfs /proc/filesystems 1>/dev/null || {
 
 ovlmod=overlayfs
 
-grep overlayfs /proc/filesystems 1>/dev/null || modprobe overlayfs
+grep overlayfs /proc/filesystems 1>/dev/null || modprobe overlayfs 2>/dev/null 
 grep overlayfs /proc/filesystems 1>/dev/null || { 
     echo "[w] not have overlayfs"
     ovlmod=""
