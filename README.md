@@ -22,6 +22,8 @@ Its just a part of miZy project, and same as other our parts can standalone used
 * led indication and splash for boot process
 * many other small fix & adds
 
+[spiread]: https://github.com/hyphop/miZy-uboot/blob/master/docs/spiread.md
+
 ## SPI NOTE
 
 by default device can not have SPI flash or have only 2M bytes (mx25l1606e its enough for uboot only),
