@@ -1,6 +1,8 @@
-## miZy additional commands for uboot
+## miZy u-boot addons and changes
 
-* [spiread](https://github.com/hyphop/miZy-uboot/blob/master/docs/spiread.md)
 * [spiread](spiread.md)
 
 documentations not complited...
+<!--
+* [spiread](https://github.com/hyphop/miZy-uboot/blob/master/docs/spiread.md)
+-->
