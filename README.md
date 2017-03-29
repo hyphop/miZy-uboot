@@ -6,7 +6,7 @@ Its just a part of miZy project, and same as other our parts can standalone used
 
 ## Features
 
-* boot from spi-flash and next **full load linux from spi-flash** is ready via new added [spiread](docs/speread.md) cmd
+* boot from spi-flash and next **full load linux from spi-flash** is ready via new added [spiread] cmd
 * ready for **fast** uboot & full linux **load**, with boot-time about **0.5 & 4-8 sec** (MMC-SPI), from power-on time
 * **4x increase SPI-flash reading speed** in SPL-loader and UBOOT ( spi work on **24Mhz** freq now )
 * **i2c** available on TWI0 (PA11 PA12)
