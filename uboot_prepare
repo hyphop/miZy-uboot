@@ -4,15 +4,25 @@
 
 . ./,config
 
+[ -f $src/._PREPARED_ ] && {
+    echo "[i] prepared already!!!
+
+NEXT:
+    ./uboot_build
+" 1>&2;
+
+    exit 0
+}
+
 [ -d $logs ] || mkdir $logs
 [ -d ../bin/uboot ] || mkdir -p ../bin/uboot
 [ -d ,tmp ] || mkdir -p ,tmp
-
-
 [ -s $src/Makefile ] || {
 # prefer squashfs source
     [ -s $squash_src ] || {
-	wget $squash_src_link -O ../$squash_src_name
+	cmd="wget $squash_src_link -O ../$squash_src_name"
+	echo $cmd
+	$cmd
     }
 
     [ -s $squash_src ] && {
@@ -49,7 +59,10 @@
 arm-openwrt-linux-gcc --version 2>/dev/null 1>/dev/null || {
 
     [ -s ../$tc_gcc_squash ] || {
-	wget $squash_tc_link -O ../$squash_tc_name
+	cmd="wget $squash_tc_link -O ../$squash_tc_name"
+	echo $cmd
+	$cmd
+	#exit 0
     }
 
     [ -s ../$tc_gcc_squash ] && {
@@ -76,5 +89,12 @@ rm configs/*
 cp -a ../$add/* .
 cd ..
 
-./uboot_defconfig
+./uboot_defconfig && {
+    echo 1 > $src/._PREPARED_
+    echo "[i] ok source is prepared
+
+NEXT:
+    ./uboot_build
+"
+}
 

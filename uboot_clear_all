@@ -17,5 +17,5 @@ p=.
 [ -d "$p/$src.rw" ] || exit 2
 [ -d "$p/$src.ro" ] || exit 3
 [ -d "$p/$src" ] || exit 4
-rm -r $p/$src.rw && rm -r $p/$src.ro && rm -r $p/$src
+rm -r $p/$src.rw && rm -r $p/$src.ro && rm -r $p/$src && echo "[i] ok"
 

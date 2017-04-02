@@ -10,10 +10,28 @@ ok=1
 
 #dtc="dtc.bin -W no-unit_address_vs_reg"
 
+arm-openwrt-linux-gcc -v 2>&1 | grep -q musl- || {
+
+    echo "[e] arm gcc not ready! try to fix it
+./uboot_clear_all
+./uboot_prepare
+" 1>&2
+    exit 1
+}
+
+[ -f $src/Makefile ] || {
+
+    echo "[e] uboot source not ready
+./uboot_clear_all
+./uboot_prepare
+" 1>&2
+    exit 1
+}
+
 [ "$ok" ] && {
     echo "[i] build uboot + args $uboot_make_args"
     #CONFIG_LZ4=1
-    time make -j 16 -C $src $uboot_make_args $@ > $logs/uboot.log || {
+    time make -C $src $uboot_make_args $@ > $logs/uboot.log || {
 	echo "[i] try to fix errors first";
 	exit 1
     }
@@ -53,4 +71,7 @@ cd $p
 uboot_there=`readlink $uboot_mizy`
 cmd="cp $uboot $uboot_there"
 echo $cmd
-$cmd && echo "get compiled uboot there $uboot_mizy => $uboot_there"
+$cmd && echo "[i] ok
+get compiled uboot there:
+    $uboot_mizy => $uboot_there
+"

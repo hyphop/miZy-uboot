@@ -39,7 +39,7 @@ export PATH=$PWD/$dtc:$PATH
 
 mizy_logo_addr_f=.mizy_logo_addr
 
-uboot_make_args=
+uboot_make_args="-j 8"
 
 uboot_mizy="uboot-mizy.bin"
 

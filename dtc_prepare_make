@@ -10,6 +10,27 @@
 v="v1.4.4"
 v="v1.4.3"
 
+# is ok already
+
+[ -f $dtc/dtc ] && { echo "[i] ok dtc is ready"; exit 0; }
+
+# try use squash
+[ -f $dtc-$v.squashfs ] && {
+#~  [ -d $dtc ] || mkdir $dtc
+    [ -f $dtc/dtc.c ] || {
+#~ 	cmd="mount -o ro $dtc-$v.squashfs $dtc"
+#~         echo $cmd
+#~         $cmd
+	cmd="unsquashfs -d $dtc $dtc-$v.squashfs"
+	echo $cmd
+	$cmd
+#~         exit 0
+    }
+}
+
+# get from git
+[ -f $dtc-$v.squashfs ] || {
+
 cmd="git clone git://git.kernel.org/pub/scm/utils/dtc/dtc.git $dtc"
 echo $cmd
 $cmd
@@ -22,7 +43,12 @@ cd $p
 
 rm -r $dtc/.git
 
+}
+
+# make
 make -C $dtc -j 4 all
+
+[ -f $dtc/dtc ] && { echo "[i] ok dtc is ready"; exit 0; }
 
 # 1.4.4
 #make all  -j 8
