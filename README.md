@@ -77,8 +77,10 @@ some source code parts in low quality ( sorry but I'm new to uboot ), some parts
 
 ## LINKS
 
+- [https://github.com/hyphop/miZy-linux-kernel](https://github.com/hyphop/miZy-linux-kernel)
+- [https://github.com/hyphop/miZy-builder](https://github.com/hyphop/miZy-builder)
 - [https://github.com/hyphop/miZy-uboot](https://github.com/hyphop/miZy-uboot)
-- [https://hyphop.github.io/mizy/](https://hyphop.github.io/mizy/)
+- [https://hyphop.github.io/mizy/](https://hyphop.github.io/mizy/) - miZy - Tiny fast embeded linux
 
 ## ;)
 
