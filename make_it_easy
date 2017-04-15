@@ -1,0 +1,20 @@
+#!/bin/sh
+## hyphop ##
+
+## one-line command - easy make 
+
+usage() { echo "USAGE:
+
+    wget https://raw.githubusercontent.com/hyphop/miZy-uboot/master/make_it_easy -O- | sh -
+
+"
+}
+
+[ -p /tmp/zero_builder ] || mkdir -p /tmp/zero_builder 
+cd /tmp/zero_builder || exit 1
+
+git clone https://github.com/hyphop/miZy-linux-kernel.git
+cd miZy-linux-kernel || exit 1
+
+./kernel_prepare
+./kernel_build_all
