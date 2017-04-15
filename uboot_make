@@ -1,0 +1,9 @@
+#!/bin/sh
+
+## hyphop ##
+
+. ./,config
+
+#export LOGO_BMP=$bdir/logo.bmp
+
+make -C $src $@
