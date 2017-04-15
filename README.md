@@ -45,6 +45,11 @@ we have tested on W25q128 spi flash, and this worked well!
 <!--building time test
     echo START; mkdir /tmp/zero_builder; cd /tmp/zero_builder; date ; git clone https://github.com/hyphop/miZy-uboot; cd miZy-uboot; ./uboot_prepare; ./uboot_build; date; echo "END"
 -->
+
+## Easy make - by one-line command
+
+    wget http://raw.githubusercontent.com/hyphop/miZy-uboot/master/make_it_easy -O- | sh -
+
 if everything is ok, compilled uboot must be there **./uboot-mizy.bin**, and ready for usage!
 now we can clear building data.
 
