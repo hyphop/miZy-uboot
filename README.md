@@ -68,6 +68,10 @@ now we can clear building data.
 
 its easy and automated by scripts!
 
+## binary downloads
+
+* https://github.com/hyphop/miZy-uboot/releases/download/v0.1-beta/uboot-mizy.bin
+
 ## miZy 
  
 miZy - open source minimalistic tiny fast embedded Linux system, (for sunxi Orange Pi Zero, another sunxi boards maybe work too )

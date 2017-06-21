@@ -1,0 +1,108 @@
+#!/usr/bin/perl
+
+## hyphop ##
+
+=pod 
+
+=head1 ABOUT
+
+inject mizycmd and splash data into compiled u-boot (only for uboot miZy version)
+
+=head1 USAGE
+
+    ./uboot_fix u-boot-sunxi-with-spl.bin splash.bin splash.cmd 4a055c60 > u-boot-mizi.bin
+
+=head1 FILES
+
+    splash.bin - binary splash data
+    splash.cmd - uboot script for mizycmd
+
+=head1 get SPLASH ADDRESS from $src/u-boot.sym
+
+    for addr in `grep -E "linux_logo$" $src/u-boot.sym`; do echo $addr; break ; done
+
+=cut
+
+our $tag1 = "MIZY_LOGO__BEGIN";
+our $tag2 = "MIZY_LOGO____END";
+our $tag3 = "mizycmd=";
+our $tag4 = ";true\x00";
+
+our $dat   = shift;    #
+our $in    = shift;    #
+our $env   = shift;    #
+our $addr  = shift;
+our $delay = shift;
+$delay ||= 0;
+
+our $addr2 = sprintf "0x%X" => hex($addr) + length $tag1;
+
+warn "[i] SPLASH $addr $addr2\n";
+
+our $data   = '';
+our $inject = '';
+our $envcmd = '';
+
+print STDERR "$dat $in env:$env $addr $delay\n";
+
+open IN, $dat;
+our $r1 = sysread IN, $data, -s $dat;
+warn "[i] readed $dat $r1 bytes\n";
+
+open IN, $in;
+our $r2 = sysread IN, $inject, -s $in;
+warn "[i] readed $in $r2 bytes\n";
+
+open IN, $env;
+our $r3 = sysread IN, $envcmd, -s $env;
+warn "[i] readed $env $r3 bytes\n";
+
+$envcmd =~ s/sm=\w+/sm=$addr2/;
+
+#warn $envcmd;
+
+$envcmd =~ s/\#[^\n]+\n*//sxg;    # remove comments
+$envcmd =~ s/\s*\n+\s*/\;/sgi;    # join by ; into one line
+                                  #warn $envcmd;
+
+$r3 = length $envcmd;
+
+#    exit
+open OUT, ">&STDOUT";
+
+if ( $data =~ /(($tag1)([\x00-\xff]+)($tag2))/ ) {
+
+    my $l   = length $1;
+    my $l2  = length $3;
+    my $rep = $2 . $inject . ( "\x00" x ( $l2 - $r2 ) ) . $4;
+    my $lr  = length $rep;
+    warn "[i] tags <$tag1> block $l bytes find </$tag2> / rep $lr\n";
+
+    $data = $` . $rep . $';
+
+    ########################1 2     3             4
+    if ( $env && $data =~ /(($tag3)([\x00-\xff]+)($tag4))/ ) {
+        my $l  = length $1;
+        my $l2 = length $3;
+        my $l3 = length $4;
+
+        my $rep = $2 . $envcmd . "\x00" . ( " " x ( $l2 - $r3 - 1 ) ) . $4;
+        my $lr = length $rep;
+        warn "[i] tags <$tag3> block $l bytes find </$tag4> / rep $lr\n";
+
+        $data = $` . $rep . $';
+
+    }
+
+    #~     if ( $data =~ s{((bootdelay)=([^\x00]+))}{
+    #~ 	sprintf "$2=%-".(length $3)."s" => $delay }sex
+    #~     ) {
+    #~ 	warn "[i] !! boot delay set $delay\n";
+    #~     }
+
+    syswrite OUT, $data
+
+}
+else {
+    warn "[i] $tag not found\n";
+}
