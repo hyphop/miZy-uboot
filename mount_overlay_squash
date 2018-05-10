@@ -4,32 +4,32 @@
 
 . ./,config
 
+
 grep squashfs /proc/filesystems 1>/dev/null || modprobe squashfs
 grep squashfs /proc/filesystems 1>/dev/null || { 
     echo "[e] not have squashfs"
     exit 1
 }
 
-ovlmod=overlayfs
+ovlmod=""
 
-grep overlayfs /proc/filesystems 1>/dev/null || modprobe overlayfs 2>/dev/null 
-grep overlayfs /proc/filesystems 1>/dev/null || { 
-    echo "[w] not have overlayfs"
-    ovlmod=""
+for v in overlayfs overlay aufs; do
 
-    grep aufs /proc/filesystems 1>/dev/null || modprobe aufs
-
-    grep aufs /proc/filesystems 1>/dev/null || { 
-	echo "[e] not have aufs"
-        exit 1
+    [ -d /sys/module/$v ] || { 
+    modprobe $v 2>/dev/null
     }
-    ovlmod=aufs
+    [ -d /sys/module/$v ] && {
+	ovlmod=$v
+	break
+    }
 
-}
+done
 
 #override mode
 #ovlmod=aufs
- 
+
+echo "[i] used $ovlmod" >&2 
+
 p=$PWD
 p=.
 
@@ -49,6 +49,11 @@ work_dir=$p/$src
 mount -o ro $sfs $ro_level
 
 case $ovlmod in  
+    overlay)
+    mount -t overlay overlay -o lowerdir=$ro_level,upperdir=$rw_level,workdir=$work_dir \
+	$work_dir
+    break
+    ;;
     overlayfs)
     mount -t overlayfs -o lowerdir=$ro_level,upperdir=$rw_level \
 	none $work_dir
