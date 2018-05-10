@@ -46,6 +46,9 @@ we have tested on W25q128 spi flash, and this worked well!
     ./uboot_prepare
     ./uboot_build
 
+!note: if have permissions problems with modprobe|mount overlay try `sudo bash` before `./uboot_prepare` ...
+
+
 <!--building time test
     echo START; mkdir /tmp/zero_builder; cd /tmp/zero_builder; date ; git clone https://github.com/hyphop/miZy-uboot; cd miZy-uboot; ./uboot_prepare; ./uboot_build; date; echo "END"
 -->
