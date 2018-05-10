@@ -4,6 +4,10 @@
 
 . ./,config
 
+## DEPS
+## * flex
+## * bison
+
 # https://git.kernel.org/pub/scm/utils/dtc/dtc.git/
 # git clone git://git.kernel.org/pub/scm/utils/dtc/dtc.git $dtc
 

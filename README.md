@@ -66,7 +66,7 @@ now we can clear building data.
     
 ## Deps and cross compilation
 
-* dtc v1.4.3
+* dtc v1.4.3 (flex + bison)
 * toolchain-arm_cortex-a9+neon_gcc-5.3.0_musl-1.1.15_eabi
 
 its easy and automated by scripts!
