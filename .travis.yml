@@ -1,2 +1,2 @@
-language: ruby
+language: c
 script:  sudo ./uboot_prepare && sudo ./uboot_build
