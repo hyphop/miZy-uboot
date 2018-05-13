@@ -1,4 +1,4 @@
-# miZy-uboot
+# miZy-uboot ![miZy_build_status](https://api.travis-ci.com/hyphop/miZy-uboot.svg?branch=master)
 
 Advanced u-boot (for sunxi Orange Pi Zero, another sunxi boards maybe work too ), ready for full load linux from spi-flash, i2c display, FEL mode, and many other improvement 
 
