@@ -1,1 +1,1 @@
-script:  ./uboot_prepare && ./uboot_build
+script:  sudo ./uboot_prepare && sudo ./uboot_build
