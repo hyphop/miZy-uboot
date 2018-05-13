@@ -1,0 +1,1 @@
+script:  ./uboot_prepare && ./uboot_build
