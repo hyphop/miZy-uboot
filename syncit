@@ -1,0 +1,32 @@
+#!/bin/sh
+
+## hyphop ##
+
+## hyphop GIT sync
+
+B=`dirname "$0"`
+
+[ "$B" = "." ] && B=$PWD
+S=`dirname "$B"`
+F=`basename "$B"`
+
+. $B/syncit.conf
+
+D=`dirname "$DST"`
+N=`basename "$DST"`
+
+echo "[i] $S // $F =>\n $D // $N" >&2
+echo rsync -av $ARGS "$@" \
+    --exclude=.git/* \
+    "$S/$F" \
+    "$D"
+
+[ "$DRY" ] && {
+echo "[i] DRY run" >&2
+exit 0
+}
+
+rsync -av $ARGS "$@" \
+    --exclude=.git/* \
+    "$S/$F" \
+    "$D"
