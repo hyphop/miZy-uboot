@@ -3,6 +3,14 @@
 ## hyphop ##
 
 ## hyphop GIT sync
+## for local usage only
+
+## USAGE 
+
+## $0		- check
+## $0 yes	- sync inc
+## $0 yes del   - sync del mode
+##
 
 B=`dirname "$0"`
 
@@ -14,6 +22,28 @@ F=`basename "$B"`
 
 D=`dirname "$DST"`
 N=`basename "$DST"`
+
+[ "$1" ] || {
+ARGS="$ARGS -n"
+}
+
+YES=
+[ "$1" = "yes" ] && {
+YES=1
+shift
+}
+
+## 
+
+[ "$1" = "del" ] && {
+shift
+ARGS="$ARGS --delete"
+[ "$YES" ] || {
+    ARGS="$ARGS -n"
+}
+
+}
+
 
 echo "[i] $S // $F =>\n $D // $N" >&2
 echo rsync -av $ARGS "$@" \
@@ -30,3 +60,7 @@ rsync -av $ARGS "$@" \
     --exclude=.git/* \
     "$S/$F" \
     "$D"
+
+[ "$YES" ] || {
+echo "[i] USAGE $0 yes @ARGS // for sync write " >&2
+}
