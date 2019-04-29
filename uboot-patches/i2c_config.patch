@@ -1,0 +1,59 @@
+--- uboot-mizy.ro/cmd/i2c.c	2017-02-08 10:11:06.000000000 +0700
++++ uboot-mizy.rw/cmd/i2c.c	2019-04-29 21:15:56.441477198 +0700
+@@ -1927,6 +1927,46 @@ static int do_i2c_reset(cmd_tbl_t * cmdt
+ 	return 0;
+ }
+ 
++// hyphop <<
++
++static int do_i2c_reset2(cmd_tbl_t * cmdtp, int flag, int argc, char * const argv[])
++{
++
++	int ret;
++	
++
++	
++	soft_i2c_gpio_sda = sunxi_name_to_gpio(argv[1]);
++	soft_i2c_gpio_scl = sunxi_name_to_gpio(argv[2]);
++
++	printf("[i2c] config SDA:%s=%d SCL:%s=%d\n", argv[1], soft_i2c_gpio_sda,
++		argv[2],soft_i2c_gpio_scl);
++		
++	ret = gpio_free(soft_i2c_gpio_sda);
++	ret = gpio_free(soft_i2c_gpio_scl);
++		
++	ret = gpio_request(soft_i2c_gpio_sda, "soft-i2c-sda");
++	if (ret) {
++		printf("Error requesting soft i2c sda pin: '%s', err %d\n",
++		       argv[1], ret);
++		return 0;
++	}
++	ret = gpio_request(soft_i2c_gpio_scl, "soft-i2c-scl");
++	if (ret) {
++		printf("Error requesting soft i2c sda pin: '%s', err %d\n",
++		       argv[1], ret);
++		return 0;
++	}
++		
++	
++	i2c_init(I2C_ADAP->speed, I2C_ADAP->slaveaddr);
++
++
++	return 0;
++}
++
++// hyphop >>
++
+ static cmd_tbl_t cmd_i2c_sub[] = {
+ #if defined(CONFIG_SYS_I2C) || defined(CONFIG_DM_I2C)
+ 	U_BOOT_CMD_MKENT(bus, 1, 1, do_i2c_show_bus, "", ""),
+@@ -1952,6 +1992,9 @@ static cmd_tbl_t cmd_i2c_sub[] = {
+ 	U_BOOT_CMD_MKENT(olen, 2, 1, do_i2c_olen, "", ""),
+ #endif
+ 	U_BOOT_CMD_MKENT(reset, 0, 1, do_i2c_reset, "", ""),
++// hyphop ==
++	U_BOOT_CMD_MKENT(reset2, 0, 3, do_i2c_reset2, "", ""),
++	
+ #if defined(CONFIG_CMD_SDRAM)
+ 	U_BOOT_CMD_MKENT(sdram, 1, 1, do_sdram, "", ""),
+ #endif
