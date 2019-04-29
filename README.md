@@ -9,7 +9,6 @@ Its just a part of miZy project, and same as other our parts can standalone used
 ## Features ( 04/30/2019 )
 
 * boot from h2+ h3 sunxi boards
-
 + friendly arm NanoPi NEO - TESTED OK
 + MX3 h3 - TESTED OK ( boot from MMC, NAND in progress )
 + M16 LITE H3 - WAIT 
@@ -21,7 +20,6 @@ Its just a part of miZy project, and same as other our parts can standalone used
 + Orange Pi PC+ - NOT TESTED
 + Orange Pi Plus2E - NOT TESTED
 + Orange Pi Lite - NOT TESTED
-
 * boot from spi-flash and next **full load linux from spi-flash** is ready via new added [spiread] cmd
 * ready for **fast** uboot & full linux **load**, with boot-time about **0.5 & 4-8 sec** (MMC-SPI), from power-on time
 * **4x increase SPI-flash reading speed** in SPL-loader and UBOOT ( spi work on **24Mhz** freq now )
