@@ -11,15 +11,15 @@ Its just a part of miZy project, and same as other our parts can standalone used
 * boot from h2+ h3 sunxi boards
 
 + friendly arm NanoPi NEO - TESTED OK
-+ MX3 h3	- TESTED OK
++ MX3 h3 - TESTED OK
 + Orange Pi ZeroZero h2+ - TESTED OK
 + Orange Pi Zero Plus2 h3 - TESTED OK
 + Orange Pi Zero R1 - TESTED OK
 + Orange Pi One	- TESTED OK
 + Orange Pi PC	- TESTED OK
-+ Orange Pi PC+ -
-+ Orange Pi Plus2E -
-+ Orange Pi Lite -
++ Orange Pi PC+ - NOT TESTED
++ Orange Pi Plus2E - NOT TESTED
++ Orange Pi Lite - NOT TESTED
 
 * boot from spi-flash and next **full load linux from spi-flash** is ready via new added [spiread] cmd
 * ready for **fast** uboot & full linux **load**, with boot-time about **0.5 & 4-8 sec** (MMC-SPI), from power-on time
