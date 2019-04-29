@@ -38,7 +38,6 @@ Its just a part of miZy project, and same as other our parts can standalone used
 * **easy** write new **patches** with find_changes script
 * led indication and splash for boot process
 * many other small fixes
-
 * boot from NAND in progress ( 04/30/2019 ) for MX3
 
 [spiread]: https://github.com/hyphop/miZy-uboot/blob/master/docs/spiread.md
