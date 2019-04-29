@@ -6,12 +6,12 @@ Advanced u-boot (for sunxi Orange Pi Zero, another sunxi boards maybe work too )
 
 Its just a part of miZy project, and same as other our parts can standalone used
 
-## Features
+## Features ( 04/30/2019 )
 
 * boot from h2+ h3 sunxi boards
 
 + friendly arm NanoPi NEO - TESTED OK
-+ MX3 h3 - TESTED OK
++ MX3 h3 - TESTED OK ( boot from MMC, NAND in progress )
 + Orange Pi ZeroZero h2+ - TESTED OK
 + Orange Pi Zero Plus2 h3 - TESTED OK
 + Orange Pi Zero R1 - TESTED OK
@@ -24,8 +24,8 @@ Its just a part of miZy project, and same as other our parts can standalone used
 * boot from spi-flash and next **full load linux from spi-flash** is ready via new added [spiread] cmd
 * ready for **fast** uboot & full linux **load**, with boot-time about **0.5 & 4-8 sec** (MMC-SPI), from power-on time
 * **4x increase SPI-flash reading speed** in SPL-loader and UBOOT ( spi work on **24Mhz** freq now )
-* **i2c** available on TWI0 (PA11 PA12)
-* **splash screen** on **ssd1306** i2c OLED 128x64 display TWI0 connected
+* improved **i2c** available for any gpios (configurable soft mode) not only for TWI0 (PA11 PA12) or TWI0 (PA18 PA19)
+* **splash screen** on **ssd1306** i2c OLED 128x64 display TWI0 or TWI1 connected
 * ready for uboot splash screen customization
 * can fix (set or disable) **FEL mode** direct from uboot shell (write or clear FEL-loader on mmc)
 * support any **LZMA LZO GZIP** uboot packed images, and directly from uboot shell cmds
@@ -35,7 +35,9 @@ Its just a part of miZy project, and same as other our parts can standalone used
 * new improved building system full automated, speed + size optimized 
 * **easy** write new **patches** with find_changes script
 * led indication and splash for boot process
-* many other small fix & adds
+* many other small fixes
+
+* boot from NAND in progress ( 04/30/2019 ) for MX3
 
 [spiread]: https://github.com/hyphop/miZy-uboot/blob/master/docs/spiread.md
 
