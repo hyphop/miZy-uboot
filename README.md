@@ -12,6 +12,7 @@ Its just a part of miZy project, and same as other our parts can standalone used
 
 + friendly arm NanoPi NEO - TESTED OK
 + MX3 h3 - TESTED OK ( boot from MMC, NAND in progress )
++ M16 LITE H3 - WAIT 
 + Orange Pi ZeroZero h2+ - TESTED OK
 + Orange Pi Zero Plus2 h3 - TESTED OK
 + Orange Pi Zero R1 - TESTED OK
